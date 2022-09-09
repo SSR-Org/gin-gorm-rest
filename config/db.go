@@ -9,7 +9,7 @@ import (
 var DB *gorm.DB
 
 func Connect() {
-	db, err := gorm.Open(postgres.Open("postgres://postgres:aaah@localhost:5432/postgres"), &gorm.Config{})
+	db, err := gorm.Open(postgres.Open("postgres://postgres:aaah@localhost:5432/postgres"), &gorm.Config{}) //"postgres://YourUserName:YourPassword@YourHostname:5432/YourDatabaseName"
 	if err != nil {
 		panic(err)
 	}

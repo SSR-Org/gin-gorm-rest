@@ -1,7 +1,13 @@
 package controller
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"github.com/shravanth-drife/gin-gorm-rest/config"
+	"github.com/shravanth-drife/gin-gorm-rest/models"
+)
 
 func UserController(c *gin.Context) {
-	c.String(200, "Connection Successful")
+	users := []models.User{}
+	config.DB.Find(&users)
+	c.JSON(200, &users)
 }
