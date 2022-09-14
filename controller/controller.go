@@ -6,6 +6,10 @@ import (
 	"github.com/shravanth-drife/gin-gorm-rest/models"
 )
 
+func CreateOrderDirect(orderJson models.RazorpayOrderItem) {
+	config.DB.Create(&orderJson)
+}
+
 func GetOrders(c *gin.Context) {
 	orders := []models.RazorpayOrderItem{}
 	config.DB.Find(&orders)
@@ -17,17 +21,6 @@ func CreateOrder(c *gin.Context) {
 	c.BindJSON(&order)
 	config.DB.Create(&order)
 	c.JSON(200, &order)
-}
-
-func CreateOrderDirect(body map[string]interface{}) {
-	// var order models.RazorpayOrder
-	// response, err := json.Marshal(body)
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-	// response.BindJSON(&order)
-	// config.DB.Create(&order)
-	// b.JSON(200, &order)
 }
 
 func DeleteOrder(c *gin.Context) {

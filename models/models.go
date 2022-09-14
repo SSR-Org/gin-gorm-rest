@@ -9,7 +9,6 @@ import (
 
 type OrderRequest struct {
 	gorm.Model
-	// Receipt  int64  `json:"receipt" gorm:"primaryKey`
 	Amount   uint64 `json:"amount"`
 	Currency string `json:"currency"`
 }
@@ -20,10 +19,6 @@ type OrderResponse struct {
 	Amount   uint64 `db:"amount" json:"amount"`
 	Currency string `db:"currency" json:"currency"`
 }
-
-// type RazorpayOrder struct {
-// 	Items []RazorpayOrderItem `json:"items"`
-// }
 
 type RazorpayOrderItem struct {
 	Id          uint64 `db:"id"`

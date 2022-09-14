@@ -1,32 +1,34 @@
-// package orders
+package orders
 
-// import (
-// 	"log"
-// 	"net/http"
-// 	"reflect"
-// 	"github.com/shravanth-drife/gin-gorm-rest/models"
-// 	"github.com/gin-gonic/gin"
-// )
+import (
+	"encoding/json"
+	"log"
 
-// var dbmap = connectToDB() //Connect to DB and get the DbMap
+	"github.com/razorpay/razorpay-go"
+	"github.com/shravanth-drife/gin-gorm-rest/controller"
+	"github.com/shravanth-drife/gin-gorm-rest/models"
+)
 
-// func Ping(c *gin.Context) {} //Check order service health
+func SendOrder(data map[string]interface{}) {
+	client := razorpay.NewClient("rzp_test_7MB1e7rfTp35VG", "YHDKuRvW0xvBvJb706mYfgDZ")
 
-// func CreateOrder(c *gin.Context) {
-// 	var orderReq models.OrderRequest
-// 	c.Bind(&orderReq)
+	body, err := client.Order.Create(data, nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	//fmt.Println(body) //map
 
-// 	order := &models.OrderResponse{
-// 		Id: orderReq.Id,
-// 		Amount: orderReq.Amount,
-// 		Currency: orderReq.Currency,
-// 	}
+	jsonString, err := json.Marshal(body) //byte slice
+	if err != nil {
+		log.Fatal(err)
+	}
+	//fmt.Println(string(jsonString)) // JSON string
 
-// 	err := dbmap.Insert(order)
-// 	if err != nil {
-// 		log.Fatal(err) //"New order creation failed in orders table"
-// 	}
+	// convert json to struct
+	orderJson := models.RazorpayOrderItem{}
+	json.Unmarshal(jsonString, &orderJson)
+	//fmt.Println(orderJson)
 
-// 	c.JSON(http.StatusCreated,
-// 		gin.H{"status": http.StatusCreated, "message": "Order Created Successfully!", "resourceId": order.Id})
-// }
+	controller.CreateOrderDirect(orderJson)
+
+}

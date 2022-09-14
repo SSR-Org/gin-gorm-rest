@@ -16,8 +16,4 @@ func Connect() {
 	db.AutoMigrate(&models.RazorpayOrderItem{})
 	DB = db
 
-	// construct a gorp DbMap
-	// dbmap := &gorp.DbMap{Db: db, Dialect: gorp.PostgresDialect{}}
-
-	// dbmap.AddTableWithName(Order{}, "orders").SetKeys(true, "Id")
 }
