@@ -3,6 +3,12 @@ module github.com/shravanth-drife/gin-gorm-rest
 go 1.19
 
 require (
+	github.com/lib/pq v1.10.7
+	github.com/razorpay/razorpay-go v0.0.0-20220720130739-c296173f2d92
+	gopkg.in/gorp.v1 v1.7.2
+)
+
+require (
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/gin-gonic/gin v1.8.1 // indirect
 	github.com/go-playground/locales v0.14.0 // indirect

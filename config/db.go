@@ -13,6 +13,11 @@ func Connect() {
 	if err != nil {
 		panic(err)
 	}
-	db.AutoMigrate(&models.User{})
+	db.AutoMigrate(&models.RazorpayOrderItem{})
 	DB = db
+
+	// construct a gorp DbMap
+	// dbmap := &gorp.DbMap{Db: db, Dialect: gorp.PostgresDialect{}}
+
+	// dbmap.AddTableWithName(Order{}, "orders").SetKeys(true, "Id")
 }
